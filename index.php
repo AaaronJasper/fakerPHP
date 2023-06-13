@@ -38,7 +38,8 @@ echo $ans;
  * 2. 隨機印出 20 個名字，中間用 `, ` 分開
  * =============================
  */
-require_once 'vendor/autoload.php';
+/*
+ require_once 'vendor/autoload.php';
 $ans="";
 for($i=0;$i<20;$i++){
     $faker = Faker\Factory::create();
@@ -51,6 +52,8 @@ for($i=0;$i<20;$i++){
     }
 }
 echo $ans;
+*/
+
 /**
  * =============================
  * 1. 請用新的 1 行
@@ -58,4 +61,39 @@ echo $ans;
  * 3. 每行 10 個名字，中間用 `, ` 分開，且名字間等距印出
  * =============================
  */
+require_once 'vendor/autoload.php';
+$ans="";
+for($i=0;$i<50;$i++){
+    $faker = Faker\Factory::create();
+    $name=$faker->name();
+    $add="";
+    $check=true;
+    for($x=0;$x<14;$x++){
+        if($check==false){
+            $add.=" ";
+        }
+        elseif($x==strlen($name)){
+            $add.=" ";
+            $check=false;
+        }
+        elseif($name[$x]==" " and $name[$x-1]!="."){
+            $add.=$name[$x];
+            $check=false;
+        }
+        else{
+            $add.=$name[$x];
+        }
+    }
+    if($i==49){
+        $ans.=$add;
+    }
+    elseif($i%10==9){
+        $ans.=$add.", \n";
+    }
+    else{
+        $ans.=$add.", ";
+    }
+}
+echo $ans;
+
 ?>
